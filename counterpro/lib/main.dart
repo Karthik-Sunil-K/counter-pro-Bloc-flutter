@@ -29,8 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  final counterBloc = CounterBloc();
+  
+  final counterBloc = CounterBlock();
 
 
   @override
@@ -47,10 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             StreamBuilder(
+              initialData: 0,
               stream:counterBloc.counterStream,
               builder: (context,snapshot){
                 return Text(
-                '$_counter',
+                '${snapshot.data}',
                 style: Theme.of(context).textTheme.headline4,
               );
               },
@@ -59,14 +60,42 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          _counter++;
-          counterBloc.counterSink.add(_counter);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: (){
+             
+              counterBloc.eventSink.add(CounterAction.Increment);
+            },
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+           FloatingActionButton(
+            onPressed: (){
+             
+              counterBloc.eventSink.add(CounterAction.Decrement);
+            },
+            tooltip: 'decrement',
+            child: Icon(Icons.remove)
+          ),
+          SizedBox(
+            width: 10,
+          ),
+           FloatingActionButton(
+            onPressed: (){
+             
+              counterBloc.eventSink.add(CounterAction.Reset);
+            },
+            tooltip: 'reset',
+            child: Icon(Icons.loop)
+          ),
+        ],
       ),
+      
     );
   }
 }
