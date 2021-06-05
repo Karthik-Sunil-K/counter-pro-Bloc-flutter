@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
              
               counterBloc.eventSink.add(CounterAction.Reset);
             },
-            tooltip: 'reset',
+            tooltip: 'resetbutton',
             child: Icon(Icons.loop)
           ),
         ],
