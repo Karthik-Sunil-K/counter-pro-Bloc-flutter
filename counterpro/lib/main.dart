@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
              
               counterBloc.eventSink.add(CounterAction.Decrement);
             },
-            tooltip: 'decrement',
+            tooltip: 'decrementBtn',
             child: Icon(Icons.remove)
           ),
           SizedBox(
